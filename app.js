@@ -1,38 +1,43 @@
-let arr = [
-  {
-    id: 0,
-    quality: "real",
-    para: "kill me at the end",
-  },
-  {
-    id: 1,
-    quality: "original",
-    para: "uuuuuuuuuuuuuuuu",
-  },
-  {
-    id: 2,
-    quality: "non existent",
-    para: "yyyyyyyyyyyyy",
-  },
-  {
-    id: 3,
-    quality: "real",
-    para:
-      "কেউ হেদায়েতের দিকে আহ্বান করলে যতজন তার অনুসরণ করবে প্রত্যেকের সমান সওয়াবের অধিকারী সে হবে, তবে যারা অনুসরন করেছে তাদের সওয়াবের কোন কমতি হবে না।",
-  },
-];
-const hadis = document.querySelector("#hadis");
-const title = document.querySelector("#title");
-const number = document.getElementById("number");
+const output = document.getElementById("output");
 const btn = document.querySelector("#btn");
-const generateHadis = () => {
-  arr.sort((a, b) => 0.5 - Math.random());
-  console.log(arr);
 
-  arr.forEach((item, index) => {
-    hadis.innerText = item.para;
-    number.innerText = item.id;
-  });
-};
+function outputArea() {
+  const random = Math.floor(Math.random(30 - 1) * 10);
+  console.log(random);
 
-btn.addEventListener("click", generateHadis);
+  const fetchAPI = fetch(
+    `https://bn-hadith-api.herokuapp.com/hadiths/${random}`
+  );
+  fetchAPI
+    .then((response) => response.json())
+    .then((data) => {
+      output.innerHTML = `
+      <p class="name">${data.name}</p>
+      <p class="description">${data.description}</p>
+      <p class="info">হাদিসের রেফারেন্সঃ ${data.numbers}</p>
+      <p class="info">হাদিসের মানঃ <span class="grade">${data.grade}</span></p>
+      
+      `;
+      const gradeBG = document.querySelector(".grade");
+      if (data.grade === "জাল হাদিস") {
+        gradeBG.style.backgroundColor = "#f14";
+        console.log("red");
+      }
+    });
+}
+
+function generateHadis() {
+  output.innerHTML = `<p>আবূ হুরায়রা (রাঃ) থেকে বর্ণিতঃ</p>
+
+<p>তিনি বলেন, রাসূলুল্লাহ (সাল্লাল্লাহু ‘আলাইহি ওয়া সাল্লাম) বলেছেন, “যে ব্যাক্তি জ্ঞানার্জনের জন্য কোন পথে চলে, আল্লাহ্‌ তার জন্য জান্নাতের পথ সহজ করে দেন।”</p>
+
+<p>হাদিসের রেফারেন্সঃ মুসলিম ২৬৯৯</p>
+
+<p>হাদিসের মানঃ সহিহ হাদিস</p>`;
+}
+
+function init() {
+  generateHadis();
+  btn.addEventListener("click", outputArea);
+}
+init();

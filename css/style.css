@@ -1,0 +1,69 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: linear-gradient(
+    to right,
+    rgb(198, 255, 221),
+    rgb(251, 215, 134),
+    rgb(247, 121, 125)
+  );
+}
+
+body {
+  background: var(--bg);
+  background-image: var(--bg);
+}
+
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+#container h1 {
+  color: #f14;
+}
+
+#container h4 {
+  color: purple;
+}
+
+#container #output {
+  padding: 10px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  gap: 10px;
+  border: 1px solid red;
+}
+
+#container #output .name {
+  color: #48b04d;
+  font-size: 1.2rem;
+}
+
+#container #output .description {
+  font-size: 2rem;
+  font-weight: bold;
+  width: 80%;
+  text-align: center;
+}
+
+#container #output .grade {
+  color: #ffffff;
+  padding: 6px 8px;
+  background: #48b04d;
+}
+
+#btn {
+  margin-top: 20px;
+}
+/*# sourceMappingURL=style.css.map */
