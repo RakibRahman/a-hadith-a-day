@@ -7,7 +7,7 @@ async function generateHadith() {
   const response = await url;
   const idNumbers = await response.json();
   const index = idNumbers.length;
-  const random = Math.floor(Math.random() * index) + 1;
+  const random = Math.floor(Math.random() * index);
 
   const fetchHadith = await fetch(`${api}/${random}`);
   const data = await fetchHadith.json();
